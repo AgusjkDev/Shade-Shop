@@ -34,6 +34,7 @@ const menuButtons: MenuButton[] = [
     {
         key: "theme",
         "aria-label": "Cambiar tema",
+        title: "¡Cambia el tema de la página!",
         children: "Tema",
         svg: theme,
     },
