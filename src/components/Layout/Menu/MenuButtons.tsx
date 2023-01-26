@@ -1,3 +1,6 @@
+import { useContext } from "react";
+
+import AppContext from "context/AppContext";
 import Svg from "components/Svg";
 import menuButtons, { MenuButton } from "data/menuButtons";
 
@@ -7,9 +10,7 @@ interface TagProps extends Omit<MenuButton, "svg"> {
 }
 
 export default function MenuButtons() {
-    const handleCategories = () => {
-        console.log("Handling categories button...");
-    };
+    const { toggleShowCategories } = useContext(AppContext);
 
     const handleTheme = () => {
         console.log("Handling theme button...");
@@ -27,7 +28,8 @@ export default function MenuButtons() {
             {menuButtons.map(menuButton => {
                 const { key, href, children, svg } = menuButton;
 
-                const onClick = !href && (key === "categories" ? handleCategories : handleTheme);
+                const onClick =
+                    !href && (key === "categories" ? toggleShowCategories : handleTheme);
                 const className =
                     key === "categories"
                         ? "order-4 md:hidden"

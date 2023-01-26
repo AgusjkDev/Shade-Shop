@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import MenuButtons from "./MenuButtons";
+import Categories from "./Categories";
 
 export default function Menu() {
     return (
@@ -10,6 +11,8 @@ export default function Menu() {
             </h1>
 
             <MenuButtons />
+
+            <Categories />
         </div>
     );
 }
