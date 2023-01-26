@@ -12,9 +12,11 @@ module.exports = {
             colors: {
                 primary: {
                     lightest: colors.gray[100],
+                    light: colors.gray[400],
                     DEFAULT: colors.gray[600],
                 },
                 secondary: {
+                    light: colors.indigo[500],
                     DEFAULT: colors.indigo[600],
                     dark: colors.indigo[700],
                 },
