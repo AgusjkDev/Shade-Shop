@@ -4,12 +4,13 @@ import Link from "next/link";
 import AppContext from "context/AppContext";
 import MainButtons from "./MainButtons";
 import Categories from "./Categories";
+import AboutButtons from "./AboutButtons";
 
 export default function Menu() {
     const { showCategories } = useContext(AppContext);
 
     return (
-        <div className="fixed bottom-0 w-full bg-white py-3.5 md:static md:bottom-auto md:flex md:max-w-xs md:flex-col md:gap-3 md:py-8">
+        <div className="fixed bottom-0 w-full bg-white py-3.5 md:static md:bottom-auto md:flex md:max-h-screen md:max-w-xs md:flex-col md:gap-3 md:py-8 md:[overflow-y:overlay]">
             <div className="flex items-center justify-evenly md:flex-col md:items-center md:gap-2.5">
                 <h1 className="order-3 text-center text-xl font-bold text-secondary hover:text-secondary-dark md:order-none md:text-2xl">
                     <Link href="/">Shade Shop</Link>
@@ -28,6 +29,12 @@ export default function Menu() {
                 </h3>
 
                 <Categories />
+            </div>
+
+            <div className="hidden items-center justify-evenly md:flex md:flex-col md:items-center md:gap-2.5">
+                <h3 className="text-center text-lg font-bold text-secondary">Sobre Nosotros</h3>
+
+                <AboutButtons />
             </div>
         </div>
     );
