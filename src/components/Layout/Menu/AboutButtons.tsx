@@ -9,7 +9,7 @@ interface AboutButton {
     svg: SVG;
 }
 
-const MAIN_BUTTONS: AboutButton[] = [
+const ABOUT_BUTTONS: AboutButton[] = [
     {
         key: "faq",
         title: "¡Visita las preguntas frecuentes!",
@@ -36,7 +36,7 @@ const MAIN_BUTTONS: AboutButton[] = [
 export default function AboutButtons() {
     return (
         <>
-            {MAIN_BUTTONS.map(props => (
+            {ABOUT_BUTTONS.map(props => (
                 <MenuButton {...props} />
             ))}
         </>
