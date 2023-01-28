@@ -36,11 +36,11 @@ export default function handler(
                 },
                 {
                     _id: "5",
-                    name: "Shorts",
+                    name: "Remeras",
                 },
                 {
                     _id: "6",
-                    name: "Remeras",
+                    name: "Shorts",
                 },
                 {
                     _id: "7",
