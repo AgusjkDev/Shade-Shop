@@ -61,15 +61,13 @@ export default function MainButons() {
                 const className =
                     key === "categories" ? "order-4 md:hidden" : key === "theme" ? "order-5" : null;
 
-                return (
-                    <MenuButton
-                        {...{
-                            ...props,
-                            ...(onClick && { onClick }),
-                            ...(className && { className }),
-                        }}
-                    />
-                );
+                const menuButtonProps = {
+                    ...props,
+                    ...(onClick && { onClick }),
+                    ...(className && { className }),
+                };
+
+                return <MenuButton {...menuButtonProps} key={key} />;
             })}
         </>
     );

@@ -37,7 +37,7 @@ export default function AboutButtons() {
     return (
         <>
             {ABOUT_BUTTONS.map(props => (
-                <MenuButton {...props} />
+                <MenuButton {...props} key={props.key} />
             ))}
         </>
     );
