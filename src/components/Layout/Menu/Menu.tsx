@@ -22,7 +22,7 @@ export default function Menu() {
             <div
                 className={`${
                     showCategories ? "flex" : "hidden"
-                } absolute bottom-0 h-full w-full bg-white md:static md:flex md:flex-col md:bg-transparent`}
+                } absolute bottom-0 h-full w-full bg-white md:static md:flex md:h-auto md:flex-col md:bg-transparent`}
             >
                 <h3 className="hidden text-center text-lg font-bold text-secondary md:block">
                     Categorías
