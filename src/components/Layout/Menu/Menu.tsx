@@ -12,7 +12,7 @@ export default function Menu() {
     return (
         <div className="md:scrollbar fixed bottom-0 w-full bg-white py-3.5 md:static md:bottom-auto md:flex md:max-h-screen md:max-w-xs md:flex-col md:gap-3 md:py-8 md:[overflow-y:overlay]">
             <div className="flex items-center justify-evenly md:flex-col md:items-center md:gap-2.5">
-                <h1 className="order-3 text-center text-xl font-bold text-secondary hover:text-secondary-dark md:order-none md:text-2xl">
+                <h1 className="order-3 text-center text-xl font-bold text-secondary transition-colors duration-300 hover:text-secondary-dark md:order-none md:text-2xl">
                     <Link href="/">Shade Shop</Link>
                 </h1>
 
