@@ -40,3 +40,9 @@ export function sort<T>(filter: string, array: T[], key: string): T[] {
             return array;
     }
 }
+
+export function formatPrice(price: number): string {
+    const priceFormat = new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS" });
+
+    return priceFormat.format(price);
+}

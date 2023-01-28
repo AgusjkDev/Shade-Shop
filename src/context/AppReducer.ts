@@ -24,6 +24,12 @@ export default function AppReducer(state: AppState, action: AppAction): AppState
                 showCategories: payload,
             };
 
+        case Type.SET_PRODUCTS:
+            return {
+                ...state,
+                products: payload,
+            };
+
         default:
             return state;
     }

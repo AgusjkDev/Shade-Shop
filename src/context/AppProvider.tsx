@@ -3,9 +3,14 @@ import { useReducer, useEffect } from "react";
 import AppContext from "./AppContext";
 import AppReducer from "./AppReducer";
 import initialState from "./initialState";
-import { getCategories } from "services";
+import { getCategories, getProducts } from "services";
 
-import type { SetCategories, SetSelectedCategory, ToggleShowCategories } from "./types";
+import type {
+    SetCategories,
+    SetSelectedCategory,
+    ToggleShowCategories,
+    SetProducts,
+} from "./types";
 import { Type } from "./enums";
 
 interface AppProviderProps {
@@ -36,8 +41,18 @@ export default function AppProvider({ children }: AppProviderProps) {
         });
     };
 
+    const setProducts: SetProducts = products => {
+        return dispatch({
+            type: Type.SET_PRODUCTS,
+            payload: products,
+        });
+    };
+
     useEffect(() => {
-        getCategories().then(categories => setCategories(categories));
+        Promise.all([getCategories(), getProducts()]).then(([categories, products]) => {
+            setCategories(categories);
+            setProducts(products);
+        });
     }, []);
 
     return (

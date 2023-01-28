@@ -3,6 +3,7 @@ import { Type } from "./enums";
 export type SetCategories = (categories: Category[]) => void;
 export type SetSelectedCategory = (category: Category) => void;
 export type ToggleShowCategories = () => void;
+export type SetProducts = (products: Product[]) => void;
 
 export type AppAction =
     | {
@@ -16,4 +17,8 @@ export type AppAction =
     | {
           type: Type.TOGGLE_SHOW_CATEGORIES;
           payload: boolean;
+      }
+    | {
+          type: Type.SET_PRODUCTS;
+          payload: Product[];
       };
