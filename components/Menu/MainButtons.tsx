@@ -1,8 +1,5 @@
-import { useContext } from "react";
-
-import AppContext from "context/AppContext";
-import { profile, cart, categories, theme } from "data/svgs";
 import MenuButton from "./MenuButton";
+import { profile, cart, categories, theme } from "data/svgs";
 
 export interface MainButton {
     key: string;
@@ -44,20 +41,19 @@ const MAIN_BUTTONS: MainButton[] = [
     },
 ];
 
-export default function MainButons() {
-    const { toggleShowCategories } = useContext(AppContext);
+interface MainButtonsProps {
+    toggleShowCategories: () => void;
+    toggleTheme: () => void;
+}
 
-    const handleTheme = () => {
-        console.log("Handling theme...");
-    };
-
+export default function MainButtons({ toggleShowCategories, toggleTheme }: MainButtonsProps) {
     return (
         <>
             {MAIN_BUTTONS.map(props => {
                 const { key, href } = props;
 
                 const onClick =
-                    !href && (key === "categories" ? toggleShowCategories : handleTheme);
+                    !href && (key === "categories" ? toggleShowCategories : toggleTheme);
                 const className =
                     key === "categories" ? "order-4 md:hidden" : key === "theme" ? "order-5" : null;
 

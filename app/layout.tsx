@@ -1,8 +1,7 @@
-import type { AppProps } from "next/app";
-import Head from "next/head";
 import localFont from "@next/font/local";
 
-import AppProvider from "context/AppProvider";
+import { Menu } from "components";
+import { getCategories } from "services";
 
 import "styles/globals.css";
 
@@ -65,24 +64,22 @@ const primaryFont = localFont({
     ],
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+    const categories = await getCategories();
+
     return (
-        <>
-            <Head>
-                <title>Shade Shop</title>
-            </Head>
+        <html lang="es">
+            <head />
 
-            <style jsx global>
-                {`
-                    :root {
-                        --font-primary: ${primaryFont.style.fontFamily};
-                    }
-                `}
-            </style>
+            <body
+                className={`flex min-h-screen flex-col bg-primary-lightest ${primaryFont.className} text-primary md:flex-row`}
+            >
+                <div className="md:scrollbar px-4 md:order-2 md:max-h-screen md:flex-1 md:px-0 md:[overflow-y:overlay]">
+                    <div className="w-full pb-16 md:mx-auto md:w-[85%] md:pb-0">{children}</div>
+                </div>
 
-            <AppProvider>
-                <Component {...pageProps} />
-            </AppProvider>
-        </>
+                <Menu categories={categories} />
+            </body>
+        </html>
     );
 }

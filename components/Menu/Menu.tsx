@@ -1,13 +1,29 @@
-import { useContext } from "react";
+"use client";
+
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-import AppContext from "context/AppContext";
 import MainButtons from "./MainButtons";
 import Categories from "./Categories";
 import AboutButtons from "./AboutButtons";
 
-export default function Menu() {
-    const { showCategories } = useContext(AppContext);
+interface MenuProps {
+    categories: Category[];
+}
+
+export default function Menu({ categories }: MenuProps) {
+    const [showCategories, setShowCategories] = useState<boolean>(false);
+    const pathname = usePathname();
+
+    const selectedCategory =
+        pathname === "/"
+            ? "todas"
+            : pathname?.includes("/category/")
+            ? pathname.split("/").at(-1)?.toLowerCase()
+            : undefined;
+    const toggleShowCategories = () => setShowCategories(prevState => !prevState);
+    const toggleTheme = () => document.documentElement.classList.toggle("dark");
 
     return (
         <div className="md:scrollbar fixed bottom-0 w-full bg-white py-3.5 md:static md:bottom-auto md:flex md:max-h-screen md:max-w-xs md:flex-col md:gap-3 md:py-8 md:[overflow-y:overlay]">
@@ -16,7 +32,10 @@ export default function Menu() {
                     <Link href="/">Shade Shop</Link>
                 </h1>
 
-                <MainButtons />
+                <MainButtons
+                    toggleShowCategories={toggleShowCategories}
+                    toggleTheme={toggleTheme}
+                />
             </div>
 
             <div
@@ -28,7 +47,11 @@ export default function Menu() {
                     Categorías
                 </h3>
 
-                <Categories />
+                <Categories
+                    categories={categories}
+                    selectedCategory={selectedCategory}
+                    toggleShowCategories={toggleShowCategories}
+                />
             </div>
 
             <div className="hidden items-center justify-evenly md:flex md:flex-col md:items-center md:gap-2.5">

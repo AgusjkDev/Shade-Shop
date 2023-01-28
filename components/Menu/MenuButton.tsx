@@ -1,5 +1,6 @@
+import Link from "next/link";
+
 import Svg from "components/Svg";
-import { ToggleShowCategories } from "context/types";
 
 interface MenuButtonProps {
     "aria-label"?: string;
@@ -8,7 +9,7 @@ interface MenuButtonProps {
     children?: React.ReactNode;
     svg: SVG;
     className?: string;
-    onClick?: ToggleShowCategories | (() => {});
+    onClick?: () => void;
 }
 
 interface TagProps extends Omit<MenuButtonProps, "svg"> {}
@@ -19,7 +20,7 @@ export default function MenuButton(props: MenuButtonProps) {
 
     const Tag = (tagProps: TagProps) => {
         return tagProps.href ? (
-            <a {...tagProps} target="_blank" rel="noopener noreferrer" />
+            <Link {...tagProps} href={tagProps.href} />
         ) : (
             <button {...tagProps} />
         );

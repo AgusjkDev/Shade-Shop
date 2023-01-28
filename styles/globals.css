@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-        @apply font-primary text-primary;
-    }
-
     svg {
         @apply h-5 w-5 fill-primary transition-colors duration-300 group-hover:fill-secondary;
     }
