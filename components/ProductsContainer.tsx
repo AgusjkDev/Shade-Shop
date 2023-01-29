@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 
+import { useProductFilter } from "hooks";
 import { formatPrice } from "helpers";
 
 interface ProductsContainerProps {
@@ -9,12 +12,25 @@ interface ProductsContainerProps {
 }
 
 export default function ProductsContainer({ category, products }: ProductsContainerProps) {
+    const { filters, filteredProducts, updateFilter } = useProductFilter(products);
+
     return (
         <div className="flex flex-col gap-6 pb-12 pt-6 md:gap-8 md:pt-8 md:pb-16">
             <h2 className="text-center text-3xl font-bold text-secondary">{category.name}</h2>
 
+            <select
+                className="mx-auto w-48 rounded-full border-r-8 border-transparent bg-white p-3 pl-2 text-sm font-medium hover:cursor-pointer"
+                onChange={e => updateFilter(e.target.value)}
+            >
+                {filters.map(filter => (
+                    <option key={filter} value={filter}>
+                        {filter}
+                    </option>
+                ))}
+            </select>
+
             <main className="grid gap-y-12 px-4 md:px-0 xl:grid-cols-2 xl:gap-y-16 2xl:grid-cols-3 2xl:gap-x-16">
-                {products.map(({ _id, name, price, images }) => (
+                {filteredProducts.map(({ _id, name, price, images }) => (
                     <div
                         key={_id}
                         className="mx-auto flex w-full max-w-[360px] flex-col justify-between gap-3 md:gap-2"
