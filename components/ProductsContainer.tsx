@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { LinkButton } from "components";
 import { useProductFilter } from "hooks";
 import { formatPrice } from "helpers";
 
@@ -58,12 +59,9 @@ export default function ProductsContainer({ category, products }: ProductsContai
                             </span>
                         </div>
 
-                        <Link
-                            href={`/product/${_id}`}
-                            className="mt-1 w-full rounded-sm bg-secondary p-3 text-center font-primary text-sm font-semibold uppercase text-white transition-colors duration-300 hover:bg-secondary-dark md:mt-1.5"
-                        >
+                        <LinkButton href={`/product/${_id}`} className="mt-1 md:mt-1.5">
                             Ver producto
-                        </Link>
+                        </LinkButton>
                     </div>
                 ))}
             </main>
