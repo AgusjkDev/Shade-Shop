@@ -1,6 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 
+import { Header } from "@/components";
 import { cn } from "@/lib/utils";
 
 import "@/styles/globals.css";
@@ -19,6 +20,8 @@ export default function RootLayout({ children }: Readonly<React.PropsWithChildre
                     GeistSans.variable,
                 )}
             >
+                <Header />
+
                 {children}
             </body>
         </html>
