@@ -44,7 +44,7 @@ export default function Navbar({ orientation, onItemClick }: Readonly<NavbarProp
     return (
         <nav
             className={cn(
-                "flex flex-col gap-8 space-x-0 md:flex-row",
+                "flex flex-col items-center gap-8 space-x-0 md:flex-row",
                 orientation && (orientation === "horizontal" ? "flex-row" : "md:flex-col"),
             )}
         >

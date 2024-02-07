@@ -5,6 +5,7 @@ import type { User } from "@prisma/client";
 
 import { buttonVariants } from "@/components/ui/button";
 import { Logo } from "@/components";
+import { cn } from "@/lib/utils";
 import MobileMenu from "./mobile-menu";
 import Navbar from "./navbar";
 import AuthButton from "./auth-button";
@@ -15,29 +16,41 @@ interface HeaderProps {
 
 export default function Header({ user }: Readonly<HeaderProps>) {
     return (
-        <header className="flex items-center justify-between gap-x-5 border-b px-5 py-2.5 lg:px-10">
+        <header className="grid grid-cols-3 items-center gap-x-5 border-b p-2.5 md:grid-cols-[1fr,5fr,1fr] lg:px-10">
             <div className="md:hidden">
                 <MobileMenu />
             </div>
 
-            <Link aria-label="Ir al inicio" href="/" className="group flex-shrink-0">
+            <Link
+                aria-label="Ir al inicio"
+                href="/"
+                className="group justify-self-center md:justify-self-start"
+            >
                 <Logo
                     priority
                     className="md:transition-transform md:group-hover:-translate-y-0.5"
                 />
             </Link>
 
-            <div className="hidden md:block">
+            <div className="hidden md:block md:justify-self-center">
                 <Navbar />
             </div>
 
-            {user ? (
-                <AuthButton user={user} />
-            ) : (
-                <Link href="/login" className={buttonVariants({ variant: "outline" })}>
-                    Iniciar sesión
-                </Link>
-            )}
+            <div className="justify-self-end">
+                {user ? (
+                    <AuthButton user={user} />
+                ) : (
+                    <Link
+                        href="/login"
+                        className={cn(
+                            "max-w-full truncate",
+                            buttonVariants({ variant: "outline" }),
+                        )}
+                    >
+                        Iniciar sesión
+                    </Link>
+                )}
+            </div>
         </header>
     );
 }
