@@ -11,12 +11,12 @@ export const metadata: Metadata = {
     description: "Shade Shop",
 };
 
-export default function RootLayout({ children }: Readonly<React.PropsWithChildren>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="es">
             <body
                 className={cn(
-                    "bg-background font-sans text-foreground antialiased",
+                    "flex h-dvh flex-col bg-background font-sans text-foreground antialiased",
                     GeistSans.variable,
                 )}
             >
