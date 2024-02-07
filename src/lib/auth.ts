@@ -3,10 +3,11 @@
 import { cookies } from "next/headers";
 import { z } from "zod";
 import bcrypt from "bcrypt";
+import type { User } from "@prisma/client";
 
 import { signupSchema, loginSchema } from "@/lib/schemas";
 import db from "@/lib/db";
-import { sign, EXPIRATION } from "@/lib/jwt";
+import { sign, verify, EXPIRATION } from "@/lib/jwt";
 
 type AuthResponse = { success: true; error?: undefined } | { success: false; error: string };
 
@@ -66,5 +67,16 @@ export async function login(values: z.infer<typeof loginSchema>): Promise<AuthRe
         return { success: true };
     } catch (_) {
         return { success: false, error: "¡Ha ocurrido un error inesperado!" };
+    }
+}
+
+export async function getSession(): Promise<{ user: Omit<User, "password"> } | null> {
+    try {
+        const token = cookies().get("token")?.value;
+        if (!token) return null;
+
+        return await verify(token);
+    } catch (_) {
+        return null;
     }
 }

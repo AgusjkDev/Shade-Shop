@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 
 import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components";
+import { getSession } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
 import "@/styles/globals.css";
@@ -12,7 +13,9 @@ export const metadata: Metadata = {
     description: "Shade Shop",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+    const session = await getSession();
+
     return (
         <html lang="es">
             <body
@@ -21,7 +24,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     GeistSans.variable,
                 )}
             >
-                <Header />
+                <Header user={session?.user} />
 
                 {children}
 
