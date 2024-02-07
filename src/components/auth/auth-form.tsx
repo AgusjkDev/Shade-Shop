@@ -39,6 +39,7 @@ export default function AuthForm({ variant }: Readonly<AuthFormProps>) {
     const router = useRouter();
 
     async function onSubmit(values: z.infer<typeof authSchema>) {
+        values.email = values.email.toLowerCase();
         setIsLoading(true);
 
         const { success, error } = await ("confirmPassword" in values
