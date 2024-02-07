@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 import { signup, login } from "@/lib/auth";
 import { signupSchema, loginSchema } from "@/lib/schemas";
 
@@ -44,12 +45,19 @@ export default function AuthForm({ variant }: Readonly<AuthFormProps>) {
             ? signup(values)
             : login(values));
         if (success) {
+            toast({
+                description:
+                    variant === "signup"
+                        ? "Cuenta creada satisfactoriamente."
+                        : "Sesión iniciada satisfactoriamente.",
+            });
+
             return router.push("/");
         }
 
         setIsLoading(false);
         form.reset();
-        alert(error); // TODO: Add custom alerts
+        toast({ description: error, variant: "destructive" });
     }
 
     const { isDirty, isValid } = form.formState;

@@ -1,6 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 
+import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components";
 import { cn } from "@/lib/utils";
 
@@ -23,6 +24,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <Header />
 
                 {children}
+
+                <Toaster />
             </body>
         </html>
     );
