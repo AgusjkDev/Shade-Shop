@@ -128,7 +128,7 @@ export default function AuthForm({ variant }: Readonly<AuthFormProps>) {
                     {...(isLoading && { "aria-label": "Cargando..." })}
                     disabled={isDisabled}
                     type="submit"
-                    className="mt-3 w-1/4"
+                    className="mt-3 w-[125px]"
                 >
                     {isLoading ? (
                         <SymbolIcon className="animate-spin" />
