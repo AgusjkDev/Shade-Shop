@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import bcrypt from "bcrypt";
 import type { User } from "@prisma/client";
@@ -79,4 +80,9 @@ export async function getSession(): Promise<{ user: Omit<User, "password"> } | n
     } catch (_) {
         return null;
     }
+}
+
+export async function logout(): Promise<void> {
+    cookies().delete("token");
+    redirect("/");
 }
