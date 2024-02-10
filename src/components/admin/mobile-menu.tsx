@@ -26,7 +26,7 @@ export default function MobileMenu(props: Readonly<MobileMenuProps>) {
                 </Button>
             </SheetTrigger>
 
-            <SheetContent className="h-full overflow-y-auto" side="bottom">
+            <SheetContent className="scrollbar h-full overflow-y-auto" side="bottom">
                 <Navbar />
             </SheetContent>
         </Sheet>
