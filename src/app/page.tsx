@@ -14,11 +14,11 @@ export default function Index() {
                 />
 
                 <div className="absolute flex flex-col gap-y-6 px-4">
-                    <h1 className="text-shadow text-center text-title uppercase text-white shadow-black/20">
+                    <h1 className="text-center text-title uppercase text-white shadow-black/20 text-shadow">
                         Shade Shop
                     </h1>
 
-                    <h2 className="text-shadow text-center text-subtitle uppercase text-white shadow-black/20">
+                    <h2 className="text-center text-subtitle uppercase text-white shadow-black/20 text-shadow">
                         Tu tienda de confianza
                     </h2>
                 </div>
