@@ -1,4 +1,5 @@
 import { fontFamily } from "tailwindcss/defaultTheme";
+import Plugin from "tailwindcss/plugin";
 import type { Config } from "tailwindcss";
 
 const config = {
@@ -14,6 +15,26 @@ const config = {
         extend: {
             fontFamily: {
                 sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+            },
+            fontSize: {
+                title: [
+                    "max(48px,min(8vw,96px))",
+                    {
+                        fontWeight: "800",
+                        lineHeight: "1",
+                        letterSpacing: "0.01em",
+                    },
+                ],
+                subtitle: [
+                    "max(24px,min(4vw,48px))",
+                    {
+                        fontWeight: "800",
+                        lineHeight: "1.25",
+                    },
+                ],
+            },
+            textShadow: {
+                DEFAULT: "1px 1px 7px var(--tw-shadow-color)",
             },
             colors: {
                 border: "hsl(var(--border))",
@@ -71,7 +92,19 @@ const config = {
             },
         },
     },
-    plugins: [require("tailwindcss-animate")],
+    plugins: [
+        require("tailwindcss-animate"),
+        Plugin(function ({ matchUtilities, theme }) {
+            matchUtilities(
+                {
+                    "text-shadow": value => ({
+                        textShadow: value,
+                    }),
+                },
+                { values: theme("textShadow") },
+            );
+        }),
+    ],
 } satisfies Config;
 
 export default config;
