@@ -1,14 +1,24 @@
 import { NextResponse, type NextRequest } from "next/server";
-import type { User } from "@prisma/client";
+import { Role, type User, type Role as RoleType } from "@prisma/client";
 
 import { verify, sign, EXPIRATION } from "@/lib/jwt";
 
-const PROTECTED_ROUTES: string[] = [];
+const ROLE_LEVELS: Record<RoleType, number> = {
+    USER: 0,
+    ADMIN: 1,
+};
+
+const PROTECTED_ROUTES: { pathname: string; role?: RoleType }[] = [
+    {
+        pathname: "/admin",
+        role: Role.ADMIN,
+    },
+];
 
 export default async function middleware(req: NextRequest) {
     const { origin, pathname } = req.nextUrl;
     const token = req.cookies.get("token")?.value;
-    const isProtectedRoute = PROTECTED_ROUTES.includes(pathname);
+    const isProtectedRoute = PROTECTED_ROUTES.some(route => pathname.startsWith(route.pathname));
 
     if (!token) {
         return isProtectedRoute
@@ -31,10 +41,17 @@ export default async function middleware(req: NextRequest) {
         return NextResponse.next();
     }
 
+    const hasPermission = PROTECTED_ROUTES.some(
+        route =>
+            pathname.startsWith(route.pathname) &&
+            (!route.role || ROLE_LEVELS[payload.user.role] >= ROLE_LEVELS[route.role]),
+    );
+
     const res =
-        pathname === "/login" || pathname === "/signup"
-            ? NextResponse.redirect(origin, { status: 307 })
-            : NextResponse.next();
+        pathname !== "/login" && pathname !== "/signup" && !(isProtectedRoute && !hasPermission)
+            ? NextResponse.next()
+            : NextResponse.redirect(origin, { status: 307 });
+
     res.cookies.set("token", newToken, { expires: Date.now() + EXPIRATION, httpOnly: true });
 
     return res;
