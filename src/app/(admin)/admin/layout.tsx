@@ -1,13 +1,15 @@
-import { Navbar, MobileMenu } from "@/components/admin";
+import { PageLayout, Navbar, MobileMenu } from "@/components/admin";
 
 export default function AdminLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <div className="flex flex-grow basis-0 divide-x overflow-y-auto">
-            <aside className="scrollbar hidden w-1/3 max-w-[275px] overflow-y-auto md:block">
+        <div className="flex flex-grow basis-0 overflow-y-auto">
+            <aside className="scrollbar hidden w-1/3 max-w-[275px] overflow-y-auto border-r md:block">
                 <Navbar />
             </aside>
 
-            <main className="scrollbar w-full overflow-y-auto pb-14 md:pb-0">{children}</main>
+            <main className="scrollbar w-full overflow-y-auto pb-14 md:pb-0">
+                <PageLayout>{children}</PageLayout>
+            </main>
 
             <div className="fixed bottom-0 grid w-full place-items-center border-t bg-background py-2.5 md:hidden">
                 <MobileMenu />
