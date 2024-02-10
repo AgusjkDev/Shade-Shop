@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -36,6 +36,7 @@ export default function AuthForm({ variant }: Readonly<AuthFormProps>) {
             confirmPassword: "",
         },
     });
+    const searchParams = useSearchParams();
     const router = useRouter();
 
     async function onSubmit(values: z.infer<typeof authSchema>) {
@@ -53,7 +54,7 @@ export default function AuthForm({ variant }: Readonly<AuthFormProps>) {
                         : "Sesión iniciada satisfactoriamente.",
             });
 
-            return router.push("/");
+            return router.push(searchParams.get("next") ?? "/");
         }
 
         setIsLoading(false);

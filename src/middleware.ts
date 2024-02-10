@@ -22,14 +22,14 @@ export default async function middleware(req: NextRequest) {
 
     if (!token) {
         return isProtectedRoute
-            ? NextResponse.redirect(`${origin}/login`, { status: 307 })
+            ? NextResponse.redirect(`${origin}/login?next=${pathname}`, { status: 307 })
             : NextResponse.next();
     }
 
     const payload = await verify<{ user: Omit<User, "password"> }>(token);
     if (!payload) {
         const res = isProtectedRoute
-            ? NextResponse.redirect(`${origin}/login`, { status: 307 })
+            ? NextResponse.redirect(`${origin}/login?next=${pathname}`, { status: 307 })
             : NextResponse.next();
         res.cookies.delete("token");
 
