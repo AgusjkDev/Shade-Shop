@@ -32,7 +32,7 @@ export default async function middleware(req: NextRequest) {
     }
 
     const res =
-        pathname === "/login" || pathname === "signup"
+        pathname === "/login" || pathname === "/signup"
             ? NextResponse.redirect(origin, { status: 307 })
             : NextResponse.next();
     res.cookies.set("token", newToken, { expires: Date.now() + EXPIRATION, httpOnly: true });
