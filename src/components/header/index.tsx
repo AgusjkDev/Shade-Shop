@@ -16,7 +16,7 @@ interface HeaderProps {
 
 export default function Header({ user }: Readonly<HeaderProps>) {
     return (
-        <header className="grid grid-cols-3 items-center gap-x-5 border-b p-2.5 md:grid-cols-[1fr,5fr,1fr] lg:px-10">
+        <header className="sticky top-0 z-[1] grid w-full grid-cols-3 items-center gap-x-5 border-b bg-background p-2.5 md:grid-cols-[1fr,5fr,1fr] lg:px-10">
             <div className="md:hidden">
                 <MobileMenu />
             </div>

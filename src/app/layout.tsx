@@ -20,7 +20,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <html lang="es">
             <body
                 className={cn(
-                    "flex h-dvh flex-col bg-background font-sans text-foreground antialiased",
+                    "flex min-h-dvh flex-col bg-background font-sans text-foreground antialiased",
                     GeistSans.variable,
                 )}
             >
