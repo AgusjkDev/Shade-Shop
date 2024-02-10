@@ -20,7 +20,7 @@ export default function MobileMenu(props: Readonly<MobileMenuProps>) {
 
     return (
         <Sheet open={open} onOpenChange={onOpenChange}>
-            <SheetTrigger>
+            <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
                     <ChevronUpIcon className="h-4 w-4" />
                 </Button>
