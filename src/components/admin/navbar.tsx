@@ -1,7 +1,7 @@
 "use client";
 
 import Link, { type LinkProps } from "next/link";
-import { DashboardIcon, CubeIcon, ArchiveIcon } from "@radix-ui/react-icons";
+import { HomeIcon, DashboardIcon, CubeIcon, ArchiveIcon } from "@radix-ui/react-icons";
 import type { IconProps } from "@radix-ui/react-icons/dist/types";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -12,6 +12,12 @@ const NAVBAR_ITEMS: ({
     icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>;
 } & React.ComponentPropsWithoutRef<"a"> &
     LinkProps)[] = [
+    {
+        key: "home",
+        children: "Inicio",
+        href: "",
+        icon: HomeIcon,
+    },
     {
         key: "categories",
         children: "Categorías",
