@@ -52,7 +52,7 @@ export default function Navbar({ orientation, onItemClick }: Readonly<NavbarProp
                 <Link
                     key={key}
                     className={cn(
-                        "text-center text-sm font-light uppercase tracking-wider text-foreground/80 transition-colors hover:text-foreground",
+                        "rounded-md text-center text-sm font-light uppercase tracking-wider text-foreground/80 transition-colors hover:text-foreground focus-visible:text-foreground",
                         className,
                     )}
                     onClick={e => {

@@ -28,7 +28,7 @@ export default function MobileMenu(props: Readonly<MobileMenuProps>) {
                 className="flex w-full flex-col items-center justify-evenly sm:max-w-none"
             >
                 <SheetHeader>
-                    <Link aria-label="Ir al inicio" href="/" onClick={close}>
+                    <Link aria-label="Ir al inicio" href="/" className="rounded-md" onClick={close}>
                         <Logo className="w-36" />
                     </Link>
                 </SheetHeader>

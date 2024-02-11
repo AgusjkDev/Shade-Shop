@@ -24,11 +24,11 @@ export default function Header({ user }: Readonly<HeaderProps>) {
             <Link
                 aria-label="Ir al inicio"
                 href="/"
-                className="group justify-self-center md:justify-self-start"
+                className="group justify-self-center rounded-md md:justify-self-start"
             >
                 <Logo
                     priority
-                    className="md:transition-transform md:group-hover:-translate-y-0.5"
+                    className="md:transition-transform md:group-hover:-translate-y-0.5 md:group-focus-visible:-translate-y-1"
                 />
             </Link>
 
