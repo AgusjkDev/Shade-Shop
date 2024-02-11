@@ -1,9 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-7 -7 440 215">
+    <style>
+        path{fill:black;}#flood{flood-color:#000;}@media(prefers-color-scheme:dark){path{fill:white;}#flood{flood-color:#fff;}}</style>
     <defs>
         <filter id="s" filterUnits="userSpaceOnUse">
             <feOffset dx="2" dy="2" />
             <feGaussianBlur result="x" stdDeviation="5" />
-            <feFlood flood-color="#000" flood-opacity=".5" />
+            <feFlood id="flood" flood-opacity=".5" />
             <feComposite in2="x" operator="in" />
             <feComposite in="SourceGraphic" />
         </filter>

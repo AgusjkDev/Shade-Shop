@@ -2,7 +2,7 @@ import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 
 import { Toaster } from "@/components/ui/toaster";
-import { Header } from "@/components";
+import { ThemeProvider, ThemeButton, Header } from "@/components";
 import { getSession } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
@@ -17,18 +17,24 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     const session = await getSession();
 
     return (
-        <html lang="es">
+        <html lang="es" suppressHydrationWarning>
             <body
                 className={cn(
                     "scrollbar flex min-h-dvh flex-col bg-background font-sans text-foreground antialiased",
                     GeistSans.variable,
                 )}
             >
-                <Header user={session?.user} />
+                <ThemeProvider>
+                    <Header user={session?.user} />
 
-                {children}
+                    {children}
 
-                <Toaster />
+                    <div className="fixed bottom-4 right-4">
+                        <ThemeButton />
+                    </div>
+
+                    <Toaster />
+                </ThemeProvider>
             </body>
         </html>
     );
