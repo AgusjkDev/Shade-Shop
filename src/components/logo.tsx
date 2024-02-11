@@ -9,7 +9,7 @@ export default function Logo({ className, ...props }: Readonly<LogoProps>) {
         <Image
             alt="Logo de Shade Shop"
             src="/logo.svg"
-            className={cn("w-24", className)}
+            className={cn("w-24 select-none", className)}
             width={440}
             height={215}
             quality={100}
