@@ -69,8 +69,6 @@ export default function CategoriesForm({ categories, variant }: Readonly<Categor
     }
 
     const currentCategory = categories.find(({ id }) => id === form.watch("id"));
-    const { isDirty, isValid } = form.formState;
-    const isDisabled = isLoading || !isDirty || !isValid;
 
     return (
         <Form {...form}>
@@ -140,7 +138,6 @@ export default function CategoriesForm({ categories, variant }: Readonly<Categor
 
                 <Button
                     {...(isLoading && { "aria-label": "Cargando..." })}
-                    disabled={isDisabled}
                     type="submit"
                     className="mt-3 w-[150px]"
                     variant={variant === "delete" ? "destructive" : "default"}

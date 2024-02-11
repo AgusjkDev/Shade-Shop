@@ -62,9 +62,6 @@ export default function AuthForm({ variant }: Readonly<AuthFormProps>) {
         toast({ description: error, variant: "destructive" });
     }
 
-    const { isDirty, isValid } = form.formState;
-    const isDisabled = isLoading || !isDirty || !isValid;
-
     return (
         <Form {...form}>
             <form
@@ -128,7 +125,6 @@ export default function AuthForm({ variant }: Readonly<AuthFormProps>) {
 
                 <Button
                     {...(isLoading && { "aria-label": "Cargando..." })}
-                    disabled={isDisabled}
                     type="submit"
                     className="mt-3 w-[125px]"
                 >
