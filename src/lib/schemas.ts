@@ -29,7 +29,7 @@ export const createCategorySchema = z.object({
 });
 
 export const deleteCategorySchema = z.object({
-    id: z.string(),
+    id: z.string().refine(Boolean, { message: "Debes seleccionar una categoría para continuar." }),
 });
 
 export const updateCategorySchema = z.object({
