@@ -2,6 +2,8 @@
 
 import { AuthCard } from "@/components/auth";
 
+export const dynamic = "force-dynamic";
+
 export default function AuthLayout() {
     return (
         <div className="grid flex-1 place-items-center py-8">
