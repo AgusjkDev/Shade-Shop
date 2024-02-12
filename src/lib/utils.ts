@@ -17,3 +17,7 @@ export function formatDate(date: Date, variant: "small" | "normal" | "large" = "
 
     return new Intl.DateTimeFormat("es-ES", options).format(date);
 }
+
+export function getRandomId() {
+    return Math.random().toString(36).slice(2);
+}

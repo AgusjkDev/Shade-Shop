@@ -3,8 +3,15 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
-import { createCategorySchema, updateCategorySchema, deleteCategorySchema } from "@/lib/schemas";
+import {
+    createCategorySchema,
+    updateCategorySchema,
+    deleteCategorySchema,
+    createProductSchema,
+    updateProductSchema,
+} from "@/lib/schemas";
 import db from "@/lib/db";
+import { uploadImage, removeImage } from "@/lib/storage";
 
 type Response = { success: true; error?: undefined } | { success: false; error: string };
 
@@ -74,4 +81,55 @@ export async function deleteCategory(
     } catch (_) {
         return { success: false, error: "¡Ha ocurrido un error inesperado!" };
     }
+}
+
+export async function createProduct(formData: FormData): Promise<Response> {
+    try {
+        const parsed = await createProductSchema.safeParseAsync({
+            ...Object.fromEntries(formData.entries()),
+            images: formData.getAll("images"),
+        });
+        if (!parsed.success) {
+            return { success: false, error: "¡Los campos son inválidos!" };
+        }
+
+        const { images, ...data } = parsed.data;
+
+        const existingProduct = await db.product.findUnique({ where: { name: data.name } });
+        if (existingProduct) {
+            return { success: false, error: "¡Ya existe un producto con ese nombre!" };
+        }
+
+        const uploadedImages: string[] = [];
+
+        if (images) {
+            let failedUploads = false;
+
+            (await Promise.allSettled(images.map(uploadImage))).forEach(promise => {
+                if (promise.status === "rejected" || !promise.value) {
+                    failedUploads = true;
+                } else {
+                    uploadedImages.push(promise.value);
+                }
+            });
+
+            if (failedUploads) {
+                uploadedImages.forEach(removeImage);
+
+                return { success: false, error: "¡Ha ocurrido un error al subir las imágenes!" };
+            }
+        }
+
+        await db.product.create({ data: { ...data, images: uploadedImages } });
+
+        revalidatePath("/admin/productos");
+
+        return { success: true };
+    } catch (_) {
+        return { success: false, error: "¡Ha ocurrido un error inesperado!" };
+    }
+}
+
+export async function updateProduct(formData: FormData): Promise<Response> {
+    return { success: false, error: "¡No implementado!" };
 }

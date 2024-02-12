@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { OpenInNewWindowIcon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
+import { OpenInNewWindowIcon, TrashIcon } from "@radix-ui/react-icons";
 import type { Category, Product } from "@prisma/client";
 
 import {
@@ -10,12 +10,17 @@ import {
 } from "@/components/ui/accordion";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
+import ProductDialog from "./product-dialog";
 
 interface GroupedProductsProps {
     groupedProducts: (Category & { products: Product[] })[];
+    categories: Category[];
 }
 
-export default function GroupedProducts({ groupedProducts }: Readonly<GroupedProductsProps>) {
+export default function GroupedProducts({
+    groupedProducts,
+    categories,
+}: Readonly<GroupedProductsProps>) {
     return (
         <Accordion type="single" collapsible>
             {groupedProducts.map(({ id: categoryId, name: categoryName, products }) => (
@@ -51,9 +56,10 @@ export default function GroupedProducts({ groupedProducts }: Readonly<GroupedPro
                                                 <OpenInNewWindowIcon />
                                             </Link>
 
-                                            <Button disabled variant="outline" size="icon">
-                                                <Pencil2Icon />
-                                            </Button>
+                                            <ProductDialog
+                                                categories={categories}
+                                                variant="update"
+                                            />
 
                                             <Button disabled variant="destructive" size="icon">
                                                 <TrashIcon />
