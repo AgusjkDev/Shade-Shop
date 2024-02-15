@@ -32,10 +32,7 @@ export const deleteCategorySchema = z.object({
     id: z.string().refine(Boolean, { message: "Debes seleccionar una categoría para continuar." }),
 });
 
-export const updateCategorySchema = z.object({
-    ...createCategorySchema.shape,
-    ...deleteCategorySchema.shape,
-});
+export const updateCategorySchema = createCategorySchema.and(deleteCategorySchema);
 
 export const createProductSchema = z.object({
     name: z
@@ -92,7 +89,4 @@ export const deleteProductSchema = z.object({
     id: z.string().refine(Boolean, { message: "Debes seleccionar una producto para continuar." }),
 });
 
-export const updateProductSchema = z.object({
-    ...createProductSchema.shape,
-    ...deleteProductSchema.shape,
-});
+export const updateProductSchema = createProductSchema.and(deleteProductSchema);
